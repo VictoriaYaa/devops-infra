@@ -1,5 +1,5 @@
 #1 -this will create a S3 bucket in AWS
-resource "aws_s3_bucket" "terraform_state_s3" {
+resource "aws_s3_bucket_versioning" "terraform_state_s3" {
   bucket = "terraform_state_s3_vic_exam" 
   force_destroy = true
 
