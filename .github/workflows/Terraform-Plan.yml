@@ -78,8 +78,8 @@ jobs:
       id: init
       run: terraform init
 
-    # Generates an execution plan for Terraform
-    - name: Terraform Plan
-      id: plan
-      run: terraform plan 
+    # # Generates an execution plan for Terraform
+    # - name: Terraform Plan
+    #   id: plan
+    #   run: terraform plan 
 
