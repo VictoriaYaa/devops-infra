@@ -29,13 +29,3 @@ resource "aws_dynamodb_table" "terraform_locks" {
       }
 }
 
-#3 - Creates S3 backend
-terraform {
-  backend "s3" {
-    bucket         = "terraform-vic-exam"
-    key            = "dc/s3/terraform.tfstate"
-    region         = "us-east-1"
-    dynamodb_table = "tf-up-and-run-locks_vic_exam"
-    encrypt        = true
-    }
-}
