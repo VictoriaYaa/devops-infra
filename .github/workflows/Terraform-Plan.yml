@@ -51,6 +51,7 @@ on:
     - eks_branch
 
 permissions:
+  id-token: write
   contents: read
 
 jobs:
