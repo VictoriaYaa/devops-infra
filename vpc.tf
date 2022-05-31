@@ -5,10 +5,13 @@ provider "aws" {
 
 data "aws_availability_zones" "available" {}
 
-locals {
-  cluster_name = "vic-terraform-eks-devops-exam"
-}
+# locals {
+#   cluster_name = "vic-terraform-eks-devops-exam"
+# }
 
+locals {
+  cluster_name = "vic-terraform-eks"
+}
 
 
 module "vpc" {
