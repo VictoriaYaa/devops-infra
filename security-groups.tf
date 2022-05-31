@@ -9,7 +9,7 @@ resource "aws_security_group" "worker_group_mgmt_one" {
 
     cidr_blocks = [
       "10.0.0.0/8",
-      "94.159.136.165"
+      "94.159.136.165/32"
     ]
   }
 }
@@ -25,7 +25,7 @@ resource "aws_security_group" "worker_group_mgmt_two" {
 
     cidr_blocks = [
       "192.168.0.0/16",
-      "94.159.136.165"
+      "94.159.136.165/32"
     ]
   }
 }
@@ -43,7 +43,7 @@ resource "aws_security_group" "all_worker_mgmt" {
       "10.0.0.0/8",
       "172.16.0.0/12",
       "192.168.0.0/16",
-      "94.159.136.165"
+      "94.159.136.165/32"
     ]
   }
 }
