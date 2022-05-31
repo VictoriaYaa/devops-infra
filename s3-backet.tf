@@ -93,7 +93,7 @@ terraform {
   backend "s3" {
     bucket         = "terraform-vic-s3-bucket"
     key            = "dc/s3/terraform.tfstate"
-    region         = "us-east-2"
+    region         = "us-east-1"
     dynamodb_table = "tf-up-and-run-locks-vic"
     encrypt        = true
     }
