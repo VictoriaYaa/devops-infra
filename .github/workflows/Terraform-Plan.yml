@@ -50,6 +50,9 @@ on:
     - main
     - eks_branch
 
+permissions:
+  contents: read
+
 jobs:
   terraform:
     name: 'Terraform'
