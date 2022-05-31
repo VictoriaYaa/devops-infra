@@ -1,4 +1,5 @@
 resource "aws_security_group" "worker_group_mgmt_one" {
+  name = "worker_group_mgmt_one"
   name_prefix = "worker_group_mgmt_one"
   vpc_id      = module.vpc.vpc_id
 
@@ -15,6 +16,7 @@ resource "aws_security_group" "worker_group_mgmt_one" {
 }
 
 resource "aws_security_group" "worker_group_mgmt_two" {
+  name = "worker_group_mgmt_two"
   name_prefix = "worker_group_mgmt_two"
   vpc_id      = module.vpc.vpc_id
 
@@ -31,6 +33,7 @@ resource "aws_security_group" "worker_group_mgmt_two" {
 }
 
 resource "aws_security_group" "all_worker_mgmt" {
+  name = "all_worker_management"
   name_prefix = "all_worker_management"
   vpc_id      = module.vpc.vpc_id
 
