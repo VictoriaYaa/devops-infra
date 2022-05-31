@@ -47,7 +47,6 @@ name: 'terraform-plan-infra'
 on:
   push:
     branches:
-    - main
     - eks_branch
 
 permissions:
