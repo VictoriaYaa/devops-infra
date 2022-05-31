@@ -23,7 +23,7 @@ server_side_encryption_configuration {
 
 # 2 - this Creates Dynamo Table
 resource "aws_dynamodb_table" "terraform_locks" {
-  name         = "tf-up-and-run-locks-vic"
+  name         = "tf-up-and-run-locks-vic-NEW"
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "LockID"
         attribute {
