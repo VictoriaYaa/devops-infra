@@ -81,5 +81,5 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       id: plan
-      run: terraform plan -out=state.tfstate
+      run: terraform plan 
 
