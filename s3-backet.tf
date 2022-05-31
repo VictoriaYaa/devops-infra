@@ -1,7 +1,7 @@
 #1 -this will create a S3 bucket in AWS
 resource "aws_s3_bucket" "terraform_state_s3" {
   #make sure you give unique bucket name
-  bucket = "terraform-coachdevops-state" 
+  bucket = "terraform-vic-exam" 
   force_destroy = true
 # Enable versioning to see full revision history of our state files
   versioning {
@@ -27,4 +27,17 @@ resource "aws_dynamodb_table" "terraform_locks" {
          name = "LockID"
          type = "S"
       }
+}
+
+#3 - Creates S3 backend
+terraform {
+  backend "s3" {
+    #Replace this with your bucket name!
+    bucket         = "terraform-vic-exam"
+    key            = "dc/s3/terraform.tfstate"
+    region         = "us-east-1"
+    #Replace this with your DynamoDB table name!
+    dynamodb_table = "tf-up-and-run-locks_vic_exam"
+    encrypt        = true
+    }
 }
