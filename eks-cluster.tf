@@ -29,7 +29,6 @@ module "eks" {
   ]
 
   write_kubeconfig  = true
-  config_output_path    = "./"
 }
 
 data "aws_eks_cluster" "cluster" {
