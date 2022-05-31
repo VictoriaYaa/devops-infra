@@ -50,27 +50,18 @@ on:
     - main
     - eks_branch
 
-<<<<<<< HEAD
-=======
 permissions:
   id-token: write
   contents: read
 
->>>>>>> eks_branch
 jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
-<<<<<<< HEAD
-      AWS_SECRET_KEY: ${{secrets.AWS_SECRET_KEY}}
-      AWS_REGION: 'us-east-1'
-  
-=======
       AWS_SECRET_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       AWS_REGION: 'us-east-1'
->>>>>>> eks_branch
 
     steps:
     # Checkout the repository to the GitHub Actions runner
