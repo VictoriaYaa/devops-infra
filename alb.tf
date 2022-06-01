@@ -39,17 +39,18 @@ resource "aws_lb_listener" "front_end" {
   }
 }
 
-# Create a Listener on Port 443 with Forward Action
-resource "aws_lb_listener" "alb-listener-ssl-certificate" {
-  load_balancer_arn = aws_lb.vic-alb.arn
-  port              = "443"
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
+# # Create a Listener on Port 443 with Forward Action
+# resource "aws_lb_listener" "alb-listener-ssl-certificate" {
+#   load_balancer_arn = aws_lb.vic-alb.arn
+#   port  = "443"
+#   protocol  = "HTTPS"
+#   ssl_policy  = "ELBSecurityPolicy-2016-08"
+#   certificate_arn = "${var.ssl-certificate-arn}"
 
-  default_action {
-    type = "forward"
-    target_group_arn = aws_lb_target_group.alb-target-group.arn
+#   default_action {
+#     type = "forward"
+#     target_group_arn = aws_lb_target_group.alb-target-group.arn
 
-  }
-}
+#   }
+# }
 
