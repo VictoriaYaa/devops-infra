@@ -48,6 +48,7 @@ on:
   push:
     branches:
     - eks_branch
+    - alb_branch
 
 permissions:
   id-token: write
