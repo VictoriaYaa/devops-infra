@@ -4,6 +4,6 @@ variable "region" {
 }
 
 
-variable {
-  cluster_name = "vic-terraform-eks-NEW"
+variable "cluster_name" {
+  default = "vic-terraform-eks-NEW"
 }
