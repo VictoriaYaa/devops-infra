@@ -1,13 +1,5 @@
-provider "aws" {
-  region = "${var.region}"
-}
-
 
 data "aws_availability_zones" "available" {}
-
-locals {
-  cluster_name = "vic-terraform-eks-NEW"
-}
 
 
 module "vpc" {
@@ -24,16 +16,16 @@ module "vpc" {
   enable_dns_hostnames = true
 
   tags = {
-    "kubernetes.io/cluster/${local.cluster_name}" = "shared"
+    "kubernetes.io/cluster/${variable.cluster_name}" = "shared"
   }
 
   public_subnet_tags = {
-    "kubernetes.io/cluster/${local.cluster_name}" = "shared"
+    "kubernetes.io/cluster/${variable.cluster_name}" = "shared"
     "kubernetes.io/role/elb"                      = "1"
   }
 
   private_subnet_tags = {
-    "kubernetes.io/cluster/${local.cluster_name}" = "shared"
+    "kubernetes.io/cluster/${variable.cluster_name}" = "shared"
     "kubernetes.io/role/internal-elb"             = "1"
   }
 }
