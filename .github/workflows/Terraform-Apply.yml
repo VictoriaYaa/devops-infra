@@ -35,6 +35,14 @@ jobs:
       id: init
       run: terraform init
 
+    # Validate the configuration files
+    - name: Terraform Validate
+      run: terraform validate
+
+    - name: Validate failed
+      if: ${{ failure() && steps.validate.outputs.failure-reason == 'validate-failed' }}
+      run: echo "terraform validate failed"
+
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       id: plan
