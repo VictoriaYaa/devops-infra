@@ -25,6 +25,5 @@ module "vpc" {
     "kubernetes.io/role/internal-elb"             = "1"
   }
 
-  security_groups = var.security_groups
 }
 
