@@ -63,7 +63,7 @@ resource "aws_eks_cluster" "eks-cluster" {
   version  = "1.21"
 
   vpc_config {
-    subnet_ids          = flatten([ module.vpc.public_subnets_id, module.vpc.private_subnets_id ])
+    subnet_ids          = flatten([ module.vpc.public_subnets, module.vpc.private_subnets ])
     security_group_ids  = flatten("${aws_security_group.all_worker_mgmt}")
   }
 
@@ -77,7 +77,7 @@ resource "aws_eks_node_group" "node-ec2" {
   cluster_name    = "${var.cluster_name}"
   node_group_name = "vic-node_group"
   node_role_arn   = aws_iam_role.NodeGroupRole.arn
-  subnet_ids      = flatten( module.aws_vpc.private_subnets_id )
+  subnet_ids      = flatten( module.aws_vpc.private_subnets )
 
   scaling_config {
     desired_size = 2
@@ -123,11 +123,11 @@ resource "aws_eks_node_group" "node-ec2" {
 # }
 
 data "aws_eks_cluster" "cluster" {
-  name = module.eks.cluster_id
+  name = "${var.cluster_name}"
 }
 
 data "aws_eks_cluster_auth" "cluster" {
-  name = module.eks.cluster_id
+  name = "${var.cluster_name}"
 }
 
 
