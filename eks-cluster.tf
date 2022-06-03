@@ -11,6 +11,16 @@ module "eks" {
     root_volume_type = "gp2"
   }
 
+  node_groups = {
+    eks_nodes = {
+      desired_capacity = 1
+      max_capacity     = 1
+      min_capaicty     = 1
+
+      instance_type = "t2.small"
+      } 
+    }
+
   worker_groups = [
     {
       name                          = "worker-group-1"
