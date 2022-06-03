@@ -11,8 +11,6 @@ module "vpc" {
   single_nat_gateway   = true
   enable_dns_hostnames = true
 
-  security_groups = var.security_groups
-  
   tags = {
     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
@@ -26,5 +24,7 @@ module "vpc" {
     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
     "kubernetes.io/role/internal-elb"             = "1"
   }
+
+  security_groups = var.security_groups
 }
 

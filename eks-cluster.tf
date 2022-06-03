@@ -64,7 +64,7 @@ resource "aws_eks_cluster" "eks-cluster" {
 
   vpc_config {
     subnet_ids          = flatten([ module.vpc.public_subnets, module.vpc.private_subnets ])
-    security_group_ids  = flatten(module.aws_vpc.security_groups_id)
+    security_group_ids  = flatten(module.vpc.security_groups_id)
   }
 
   depends_on = [

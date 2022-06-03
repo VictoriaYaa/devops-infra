@@ -8,7 +8,6 @@ variable "cluster_name" {
   default = "vic-terraform-eks-NEW"
 }
 
-
 variable "security_groups" {
   type = list(object({
     name        = string
