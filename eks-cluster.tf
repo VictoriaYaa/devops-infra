@@ -121,13 +121,15 @@ resource "aws_eks_node_group" "node-ec2" {
 #   write_kubeconfig  = true
 # }
 
-data "aws_eks_cluster" "cluster" {
-  name = "${var.cluster_name}"
-}
 
-data "aws_eks_cluster_auth" "cluster" {
-  name = "${var.cluster_name}"
-}
+
+# data "aws_eks_cluster" "cluster" {
+#   name = "${var.cluster_name}"
+# }
+
+# data "aws_eks_cluster_auth" "cluster" {
+#   name = "${var.cluster_name}"
+# }
 
 
 data "aws_availability_zones" "available" {}
