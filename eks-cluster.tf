@@ -98,38 +98,13 @@ resource "aws_eks_node_group" "node-ec2" {
 
 
 
+data "aws_eks_cluster" "cluster" {
+  name = "${var.cluster_name}"
+}
 
-# module "eks" {
-#   source          = "terraform-aws-modules/eks/aws"
-#   version         = "17.24.0"
-#   cluster_name    = "${var.cluster_name}"
-#   cluster_version = "1.20"
-#   subnets         = module.vpc.private_subnets
-#   cluster_endpoint_private_access = true
-#   vpc_id = module.vpc.vpc_id
-
-#   node_groups = {
-#     eks_nodes = {
-#       desired_capacity = 1
-#       max_capacity     = 2
-#       min_capaicty     = 1
-#       capacity_type = "ON_DEMAND"
-#       instance_type = "t2.small"
-#       } 
-#     }
-
-#   write_kubeconfig  = true
-# }
-
-
-
-# data "aws_eks_cluster" "cluster" {
-#   name = "${var.cluster_name}"
-# }
-
-# data "aws_eks_cluster_auth" "cluster" {
-#   name = "${var.cluster_name}"
-# }
+data "aws_eks_cluster_auth" "cluster" {
+  name = "${var.cluster_name}"
+}
 
 
 data "aws_availability_zones" "available" {}

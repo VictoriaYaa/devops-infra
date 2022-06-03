@@ -33,6 +33,6 @@ output "cluster_name" {
   value       = var.cluster_name
 }
 
-# output "endpoint" {
-#   value = data.aws_eks_cluster.cluster.endpoint
-# }
+output "endpoint" {
+  value = data.aws_eks_cluster.cluster.endpoint
+}
