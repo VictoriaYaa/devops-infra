@@ -77,7 +77,7 @@ resource "aws_eks_node_group" "node-ec2" {
   cluster_name    = "${var.cluster_name}"
   node_group_name = "vic-node_group"
   node_role_arn   = aws_iam_role.NodeGroupRole.arn
-  subnet_ids      = flatten( module.aws_vpc.private_subnets )
+  subnet_ids      = flatten( module.vpc.private_subnets )
 
   scaling_config {
     desired_size = 2
