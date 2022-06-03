@@ -58,7 +58,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKS_CNI_Policy" {
 
 
 resource "aws_eks_cluster" "eks-cluster" {
-  name     = "eks-cluster"
+  name     = "${var.cluster_name}"
   role_arn = aws_iam_role.EKSClusterRole.arn
   version  = "1.21"
 
@@ -121,13 +121,15 @@ resource "aws_eks_node_group" "node-ec2" {
 #   write_kubeconfig  = true
 # }
 
-data "aws_eks_cluster" "cluster" {
-  name = "${var.cluster_name}"
-}
 
-data "aws_eks_cluster_auth" "cluster" {
-  name = "${var.cluster_name}"
-}
+
+# data "aws_eks_cluster" "cluster" {
+#   name = "${var.cluster_name}"
+# }
+
+# data "aws_eks_cluster_auth" "cluster" {
+#   name = "${var.cluster_name}"
+# }
 
 
 data "aws_availability_zones" "available" {}

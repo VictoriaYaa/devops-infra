@@ -5,7 +5,7 @@ variable "region" {
 
 
 variable "cluster_name" {
-  default = "vic-terraform-eks-NEW"
+  default = "NEW-vic-eks"
 }
 
 variable "security_groups" {
