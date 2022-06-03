@@ -5,7 +5,7 @@ variable "region" {
 
 
 variable "cluster_name" {
-  default = "vic-eks-NEW"
+  default = "NEW-vic-eks"
 }
 
 variable "security_groups" {
