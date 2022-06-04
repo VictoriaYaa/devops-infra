@@ -66,8 +66,6 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
-        kubectl delete svc external-lb-service internal-lb-service
-
         echo "kubectl get all"
         kubectl get all
 
