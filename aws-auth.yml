@@ -1,0 +1,11 @@
+apiVersion: v1 
+kind: ConfigMap 
+metadata: 
+  name: aws-auth 
+  namespace: kube-system 
+data: 
+  mapUsers: | 
+    - userarn: arn:aws:iam::476285196763:user/victoria-yaakov-prog
+      username: victoria-yaakov-prog
+      groups:
+        - system:masters
