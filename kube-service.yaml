@@ -22,7 +22,6 @@ metadata:
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: alb
     service.beta.kubernetes.io/aws-load-balancer-name: External-LB-vic
-    # service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
 spec:
   type: LoadBalancer
   selector:
