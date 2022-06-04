@@ -81,7 +81,3 @@ jobs:
         kubectl get pods -o wide
         echo "kubectl get svc"
         kubectl get svc
-        echo "delete services"
-        kubectl delete svc internal-lb-service
-        kubectl delete svc external-lb-service
-        echo "kubectl get svc"
