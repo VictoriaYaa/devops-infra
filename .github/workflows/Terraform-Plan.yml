@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Terraform Process for Branches'
+    name: 'Process for Branches'
     runs-on: ubuntu-latest
     
 
@@ -54,3 +54,21 @@ jobs:
       id: plan
       run: terraform plan 
 
+    # Install kubectl
+    - name: Install Kubectl
+      uses: azure/setup-kubectl@v1
+      with:
+        version: 'v1.21.3'
+      id: install
+        
+    - name: Update Kube Config
+      run: aws eks update-kubeconfig --name NEW-vic-eks --region us-east-1
+
+    - name: Checking the Kubectl Output
+      run: |
+        echo "kubectl get all"
+        kubectl get all
+        echo "kubectl get nodes -o wide"
+        kubectl get nodes -o wide
+        echo "kubectl get pods -o wide"
+        kubectl get pods -o wide
