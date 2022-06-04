@@ -4,7 +4,7 @@ metadata:
   name: internal-lb-service
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: nlb
-    service.beta.kubernetes.io/aws-load-balancer-name: Internal-LB-vic
+    service.beta.kubernetes.io/aws-load-balancer-name: "internal-lb-vic"
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
     service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
 spec:
@@ -21,7 +21,7 @@ metadata:
   name: external-lb-service
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: alb
-    service.beta.kubernetes.io/aws-load-balancer-name: External-LB-vic
+    service.beta.kubernetes.io/aws-load-balancer-name: "external-lb-vic"
 spec:
   type: LoadBalancer
   selector:
