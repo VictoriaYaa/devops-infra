@@ -70,6 +70,7 @@ jobs:
         kubectl apply -f aws-auth.yaml
         kubectl apply -f kube-service.yaml
         
+        
     - name: Verify Deployment of the Image to Amazon EKS
       run: |
         echo "kubectl get all"
@@ -78,3 +79,9 @@ jobs:
         kubectl get nodes -o wide
         echo "kubectl get pods -o wide"
         kubectl get pods -o wide
+        echo "kubectl get svc"
+        kubectl get svc
+        echo "delete services"
+        kubectl delete svc internal-lb-service
+        kubectl delete svc external-lb-service
+        echo "kubectl get svc"
