@@ -64,11 +64,11 @@ jobs:
     - name: Update Kube Config
       run: aws eks update-kubeconfig --name NEW-vic-eks --region us-east-1
 
-    - name: Checking the Kubectl Output
+    - name: Check the Kubectl Output
       run: |
         echo "kubectl get all"
         kubectl get all
-        
+
         echo "kubectl get nodes -o wide"
         kubectl get nodes -o wide
 
