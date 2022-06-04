@@ -68,10 +68,12 @@ jobs:
       run: |
         echo "kubectl get all"
         kubectl get all
+        
         echo "kubectl get nodes -o wide"
         kubectl get nodes -o wide
+
         echo "kubectl get pods -o wide"
         kubectl get pods -o wide
-        kubectl delete svc vic-counter-service
+
         echo "kubectl get svc"
         kubectl get svc
