@@ -61,6 +61,9 @@ jobs:
         version: 'v1.21.3'
       id: install
         
+    - name: Update Kube Config
+      run: aws eks update-kubeconfig --name NEW-vic-eks --region us-east-1
+
     - name: Checking the Kubectl Output
       run: |
         echo "kubectl get all"
