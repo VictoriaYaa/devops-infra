@@ -6,8 +6,8 @@ on:
     - main
 
 jobs:
-  terraform:
-    name: 'Terraform Apply to the Main'
+  deploy:
+    name: 'Terraform Apply and Deploy services to EKS'
     runs-on: ubuntu-latest
   
 
@@ -53,3 +53,28 @@ jobs:
     - name: Terraform Apply 
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve 
+
+
+    # Install kubectl
+    - name: Install Kubectl
+      uses: azure/setup-kubectl@v1
+      with:
+        version: 'v1.21.3'
+      id: install
+
+    - name: Update Kube Config
+      run: aws eks update-kubeconfig --name NEW-vic-eks --region us-east-1
+
+    - name: Deploy Services to Amazon EKS
+      run: |
+        kubectl apply -f aws-auth.yaml
+        kubectl apply -f kube-service.yaml
+        
+    - name: Verify Deployment of the Image to Amazon EKS
+      run: |
+        echo "kubectl get all"
+        kubectl get all
+        echo "kubectl get nodes -o wide"
+        kubectl get nodes -o wide
+        echo "kubectl get pods -o wide"
+        kubectl get pods -o wide
