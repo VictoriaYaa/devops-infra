@@ -79,8 +79,8 @@ resource "aws_eks_node_group" "node-ec2" {
   subnet_ids      = flatten( module.vpc.private_subnets )
 
   scaling_config {
-    desired_size = 2
-    max_size     = 3
+    desired_size = 1
+    max_size     = 10
     min_size     = 1
   }
 
