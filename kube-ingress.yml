@@ -14,9 +14,6 @@ spec:
       http:
         paths:
           - path: /*
-            pathType: Prefix
             backend:
-              service:
-                name: counter-service
-                port:
-                  number: 80
+              serviceName: counter-service
+              servicePort: 80
