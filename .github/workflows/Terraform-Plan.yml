@@ -68,11 +68,12 @@ jobs:
       run: |
         echo "kubectl get namespace"
         kubectl get namespace
+        kubectl delete namespace cert-manager
+        kubectl create namespace cert-manager
+        kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.12.0/cert-manager.yaml
 
+        kubectl get pods --namespace cert-manager
 
-        kubectl apply \
-            --validate=false \
-            -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
 
         curl -Lo v2_4_1_full.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.4.1/v2_4_1_full.yaml
         sed -i.bak -e 's|your-cluster-name|NEW-vic-eks|' ./v2_4_1_full.yaml
@@ -80,26 +81,23 @@ jobs:
         echo "kubectl get all -n default"
         kubectl get all -n default
 
-        echo "kubectl get nodes -o wide"
-        kubectl get nodes -o wide
+        echo "kubectl get all -n kube-system"
+        kubectl get all -n kube-system
 
-        echo "kubectl get pods -o wide"
-        kubectl get pods -o wide
+        echo "kubectl get all -n cert-manager"
+        kubectl get all -n cert-manager
 
         echo "kubectl get svc"
         kubectl get svc
         
-        kubectl apply -f kube-service.yaml
-
 
         echo "kubectl get ingress"
         kubectl get ingress
 
         echo "kubectl apply -f deployment.yaml"
+        kubectl apply -f kube-service.yaml
         kubectl apply -f deployment.yaml
         kubectl get po -n cert-manager
-        echo "kubectl describe po cert-manager-webhook-764b556954-rpbcj -n cert-manager"
-        kubectl describe po cert-manager-webhook-764b556954-rpbcj -n cert-manager
         # kubectl apply -f v2_4_1_full.yaml
         # kubectl apply -f ingress.yml
 
