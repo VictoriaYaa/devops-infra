@@ -69,10 +69,7 @@ jobs:
         kubectl apply -f kube-ingress.yml
         kubectl apply -f serviceaccount.yml
         kubectl get namespace
-        kubectl get all -n kube-system
         kubectl get all -n default
-        kubectl get all -n kube-node-lease
-        kubectl get all -n kube-public
 
         echo "kubectl get all"
         kubectl get all
