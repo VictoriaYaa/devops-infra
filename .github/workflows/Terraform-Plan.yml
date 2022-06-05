@@ -67,6 +67,7 @@ jobs:
     - name: Check the Kubectl Output
       run: |
         kubectl apply -f kube-ingress.yml
+        
         echo "kubectl get all"
         kubectl get all
 
@@ -78,4 +79,3 @@ jobs:
 
         echo "kubectl get svc"
         kubectl get svc
-        kubectl describe service external-lb-service
