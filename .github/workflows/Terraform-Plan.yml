@@ -74,7 +74,7 @@ jobs:
         sed -i.bak -e 's|your-cluster-name|NEW-vic-eks|' ./v2_4_1_full.yaml
 
 
-        kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller/crds?ref=master"
+        kubectl apply -k "https://github.com/jetstack/cert-manager/releases/download/v0.15.2/cert-manager.crds.yaml"
 
         kubectl apply -f v2_4_1_full.yaml
 
