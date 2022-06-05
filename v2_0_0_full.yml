@@ -5,7 +5,7 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.5.0
   creationTimestamp: null
   labels:
-    app.kubernetes.io/name: aws-lb-controller
+    app.kubernetes.io/name: aws-load-balancer-controller
   name: ingressclassparams.elbv2.k8s.aws
 spec:
   group: elbv2.k8s.aws
@@ -69,6 +69,24 @@ spec:
                 - ipv4
                 - dualstack
                 type: string
+              loadBalancerAttributes:
+                description: LoadBalancerAttributes define the custom attributes to
+                  LoadBalancers for all Ingress that that belong to IngressClass with
+                  this IngressClassParams.
+                items:
+                  description: Attributes defines custom attributes on resources.
+                  properties:
+                    key:
+                      description: The key of the attribute.
+                      type: string
+                    value:
+                      description: The value of the attribute.
+                      type: string
+                  required:
+                  - key
+                  - value
+                  type: object
+                type: array
               namespaceSelector:
                 description: NamespaceSelector restrict the namespaces of Ingresses
                   that are allowed to specify the IngressClass with this IngressClassParams.
@@ -158,7 +176,7 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.5.0
   creationTimestamp: null
   labels:
-    app.kubernetes.io/name: aws-lb-controller
+    app.kubernetes.io/name: aws-load-balancer-controller
   name: targetgroupbindings.elbv2.k8s.aws
 spec:
   group: elbv2.k8s.aws
@@ -369,6 +387,13 @@ spec:
           spec:
             description: TargetGroupBindingSpec defines the desired state of TargetGroupBinding
             properties:
+              ipAddressType:
+                description: ipAddressType specifies whether the target group is of
+                  type IPv4 or IPv6. If unspecified, it will be automatically inferred.
+                enum:
+                - ipv4
+                - ipv6
+                type: string
               networking:
                 description: networking defines the networking rules to allow ELBV2
                   LoadBalancer to access targets in TargetGroup.
@@ -511,6 +536,7 @@ spec:
               targetGroupARN:
                 description: targetGroupARN is the Amazon Resource Name (ARN) for
                   the TargetGroup.
+                minLength: 1
                 type: string
               targetType:
                 description: targetType is the TargetType of TargetGroup. If unspecified,
@@ -542,13 +568,14 @@ status:
     plural: ""
   conditions: []
   storedVersions: []
+
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   labels:
-    app.kubernetes.io/name: aws-lb-controller
-  name: aws-lb-controller-leader-election-role
+    app.kubernetes.io/name: aws-load-balancer-controller
+  name: aws-load-balancer-controller-leader-election-role
   namespace: default
 rules:
 - apiGroups:
@@ -560,7 +587,7 @@ rules:
 - apiGroups:
   - ""
   resourceNames:
-  - aws-lb-controller-leader
+  - aws-load-balancer-controller-leader
   resources:
   - configmaps
   verbs:
@@ -573,8 +600,8 @@ kind: ClusterRole
 metadata:
   creationTimestamp: null
   labels:
-    app.kubernetes.io/name: aws-lb-controller
-  name: aws-lb-controller-role
+    app.kubernetes.io/name: aws-load-balancer-controller
+  name: aws-load-balancer-controller-role
 rules:
 - apiGroups:
   - ""
@@ -625,14 +652,6 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - secrets
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - ""
-  resources:
   - services
   verbs:
   - get
@@ -647,6 +666,14 @@ rules:
   verbs:
   - patch
   - update
+- apiGroups:
+  - discovery.k8s.io
+  resources:
+  - endpointslices
+  verbs:
+  - get
+  - list
+  - watch
 - apiGroups:
   - elbv2.k8s.aws
   resources:
@@ -721,38 +748,38 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   labels:
-    app.kubernetes.io/name: aws-lb-controller
-  name: aws-lb-controller-leader-election-rolebinding
+    app.kubernetes.io/name: aws-load-balancer-controller
+  name: aws-load-balancer-controller-leader-election-rolebinding
   namespace: default
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: aws-lb-controller-leader-election-role
+  name: aws-load-balancer-controller-leader-election-role
 subjects:
 - kind: ServiceAccount
-  name: aws-lb-controller
+  name: aws-load-balancer-controller
   namespace: default
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   labels:
-    app.kubernetes.io/name: aws-lb-controller
-  name: aws-lb-controller-rolebinding
+    app.kubernetes.io/name: aws-load-balancer-controller
+  name: aws-load-balancer-controller-rolebinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: aws-lb-controller-role
+  name: aws-load-balancer-controller-role
 subjects:
 - kind: ServiceAccount
-  name: aws-lb-controller
+  name: aws-load-balancer-controller
   namespace: default
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app.kubernetes.io/name: aws-lb-controller
+    app.kubernetes.io/name: aws-load-balancer-controller
   name: aws-load-balancer-webhook-service
   namespace: default
 spec:
@@ -761,33 +788,33 @@ spec:
     targetPort: 9443
   selector:
     app.kubernetes.io/component: controller
-    app.kubernetes.io/name: aws-lb-controller
+    app.kubernetes.io/name: aws-load-balancer-controller
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/component: controller
-    app.kubernetes.io/name: aws-lb-controller
-  name: aws-lb-controller
+    app.kubernetes.io/name: aws-load-balancer-controller
+  name: aws-load-balancer-controller
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/component: controller
-      app.kubernetes.io/name: aws-lb-controller
+      app.kubernetes.io/name: aws-load-balancer-controller
   template:
     metadata:
       labels:
         app.kubernetes.io/component: controller
-        app.kubernetes.io/name: aws-lb-controller
+        app.kubernetes.io/name: aws-load-balancer-controller
     spec:
       containers:
       - args:
         - --cluster-name=NEW-vic-eks
         - --ingress-class=alb
-        image: amazon/aws-alb-ingress-controller:v2.2.0
+        image: amazon/aws-alb-ingress-controller:v2.4.1
         livenessProbe:
           failureThreshold: 2
           httpGet:
@@ -819,7 +846,7 @@ spec:
       priorityClassName: system-cluster-critical
       securityContext:
         fsGroup: 1337
-      serviceAccountName: aws-lb-controller
+      serviceAccountName: aws-load-balancer-controller
       terminationGracePeriodSeconds: 10
       volumes:
       - name: cert
@@ -827,11 +854,11 @@ spec:
           defaultMode: 420
           secretName: aws-load-balancer-webhook-tls
 ---
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   labels:
-    app.kubernetes.io/name: aws-lb-controller
+    app.kubernetes.io/name: aws-load-balancer-controller
   name: aws-load-balancer-serving-cert
   namespace: default
 spec:
@@ -843,11 +870,11 @@ spec:
     name: aws-load-balancer-selfsigned-issuer
   secretName: aws-load-balancer-webhook-tls
 ---
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   labels:
-    app.kubernetes.io/name: aws-lb-controller
+    app.kubernetes.io/name: aws-load-balancer-controller
   name: aws-load-balancer-selfsigned-issuer
   namespace: default
 spec:
@@ -859,7 +886,7 @@ metadata:
   annotations:
     cert-manager.io/inject-ca-from: default/aws-load-balancer-serving-cert
   labels:
-    app.kubernetes.io/name: aws-lb-controller
+    app.kubernetes.io/name: aws-load-balancer-controller
   name: aws-load-balancer-webhook
 webhooks:
 - admissionReviewVersions:
@@ -882,7 +909,7 @@ webhooks:
     - key: app.kubernetes.io/name
       operator: NotIn
       values:
-      - aws-lb-controller
+      - aws-load-balancer-controller
   rules:
   - apiGroups:
     - ""
@@ -920,7 +947,7 @@ metadata:
   annotations:
     cert-manager.io/inject-ca-from: default/aws-load-balancer-serving-cert
   labels:
-    app.kubernetes.io/name: aws-lb-controller
+    app.kubernetes.io/name: aws-load-balancer-controller
   name: aws-load-balancer-webhook
 webhooks:
 - admissionReviewVersions:
@@ -949,7 +976,7 @@ webhooks:
     service:
       name: aws-load-balancer-webhook-service
       namespace: default
-      path: /validate-networking-v1beta1-ingress
+      path: /validate-networking-v1-ingress
   failurePolicy: Fail
   matchPolicy: Equivalent
   name: vingress.elbv2.k8s.aws
@@ -957,10 +984,30 @@ webhooks:
   - apiGroups:
     - networking.k8s.io
     apiVersions:
-    - v1beta1
+    - v1
     operations:
     - CREATE
     - UPDATE
     resources:
     - ingresses
   sideEffects: None
+---
+apiVersion: elbv2.k8s.aws/v1beta1
+kind: IngressClassParams
+metadata:
+  labels:
+    app.kubernetes.io/name: aws-load-balancer-controller
+  name: alb
+---
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  labels:
+    app.kubernetes.io/name: aws-load-balancer-controller
+  name: alb
+spec:
+  controller: ingress.k8s.aws/alb
+  parameters:
+    apiGroup: elbv2.k8s.aws
+    kind: IngressClassParams
+    name: alb

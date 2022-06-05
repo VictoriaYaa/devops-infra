@@ -66,6 +66,7 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
+        kubectl delete serviceaccount aws-lb-controller
         kubectl apply -f kube-ingress.yml
         kubectl apply -f serviceaccount.yml
         kubectl apply -f kube-service.yaml
@@ -84,5 +85,9 @@ jobs:
         kubectl get svc
 
         kubectl get deployment -n default aws-lb-controller
+
+        kubectl apply \
+            --validate=false \
+            -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
 
         
