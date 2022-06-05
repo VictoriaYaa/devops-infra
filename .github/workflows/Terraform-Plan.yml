@@ -66,8 +66,6 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
-        kubectl delete svc foo-app-service
-        kubectl delete serviceaccount aws-lb-controller
         kubectl apply -f kube-ingress.yml
         kubectl apply -f serviceaccount.yml
         kubectl apply -f kube-service.yaml
@@ -83,7 +81,6 @@ jobs:
 
         echo "kubectl get svc"
         kubectl get svc
-        eksctl utils associate-iam-oidc-provider --cluster=NEW-vic-eks --approve
         aws iam create-policy \
           --policy-name AWSLoadBalancerControllerIAMPolicy \
           --policy-document file://iam_policy.json
