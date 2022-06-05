@@ -99,17 +99,20 @@ jobs:
 
         echo "kubectl get deployments --all-namespaces"
         kubectl get deployments --all-namespaces
+        kubectl describe service cert-manager-webhook -n cert-manager
+        
+        echo "kubectl describe svc aws-load-balancer-webhook-service -n kube-system"
+        kubectl describe svc aws-load-balancer-webhook-service -n kube-system
 
 
         echo "kubectl apply -f deployment.yaml"
         kubectl apply -f kube-service.yaml
         kubectl apply -f v2_4_1_full.yaml
-        # kubectl apply -f ingress.yml
+        kubectl apply -f ingress.yml
 
 
-        echo "kubectl describe svc aws-load-balancer-webhook-service -n kube-system"
-        kubectl describe svc aws-load-balancer-webhook-service -n kube-system
         
+
         echo "kubectl get ingress"
         kubectl get ingress
 
