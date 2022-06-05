@@ -67,7 +67,8 @@ jobs:
     - name: Check the Kubectl Output
       run: |
         kubectl apply -f kube-ingress.yml
-        
+        kubectl apply -f serviceaccount.yml
+        kubectl create serviceaccount serviceaccount-vic --cluster
         echo "kubectl get all"
         kubectl get all
 
