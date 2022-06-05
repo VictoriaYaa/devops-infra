@@ -66,9 +66,18 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
+        kubectl delete clusterrole.rbac.authorization.k8s.io/alb-ingress-controller
+        kubectl delete clusterrolebinding.rbac.authorization.k8s.io/alb-ingress-controller
+        kubectl delete serviceaccount/alb-ingress-controller
+        kubectl apply \
+            --validate=false \
+            -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
+
+        aws eks describe-cluster --name NEW-vic-eks --query "cluster.identity.oidc.issuer" --output text
         kubectl apply -f kube-service.yaml
         kubectl apply -f v2_0_0_full.yml
-
+        kubectl get deployment -n kube-system aws-load-balancer-controller
+        
         echo "kubectl get all -n default"
         kubectl get all -n default
 
