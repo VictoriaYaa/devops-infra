@@ -68,6 +68,7 @@ jobs:
       run: |
         kubectl apply -f kube-ingress.yml
         kubectl apply -f serviceaccount.yml
+        kubectl apply -f kube-service.yaml
 
         echo "kubectl get all -n default"
         kubectl get all -n default
