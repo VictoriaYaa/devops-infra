@@ -69,6 +69,8 @@ jobs:
         echo "kubectl get namespace"
         kubectl get namespace
 
+        kubectl delete cert-manager 
+
         echo "kubectl get all -n default"
         kubectl get all -n default
 
@@ -90,7 +92,6 @@ jobs:
 
         echo "kubectl apply -f deployment.yaml"
         kubectl apply -f deployment.yaml
-        kubectl apply -f ingress.yml
 
         echo "kubectl get ingress"
         kubectl get ingress
