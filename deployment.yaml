@@ -1,25 +1,25 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: vic-alb-ingress
-  labels: 
-    app.kubernetes.io/name: vic-alb-ingress
-  namespace: kube-system
-spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: vic-alb-ingress
-  template:
-    metadata:
-      labels:
-        app.kubernetes.io/name: vic-alb-ingress
-    spec:
-      containers:
-      - name: vic-alb-ingress
-        args:
-        - --ingress-class=alb
-        - --cluster-name=NEW-vic-eks
-        - --aws-region=us-east-1
-        image: docker.io/amazon/aws-alb-ingress-controller:v1.1.6
-      serviceAccountName: alb-ingress-controller
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: vic-alb-ingress
+#   labels: 
+#     app.kubernetes.io/name: vic-alb-ingress
+#   namespace: kube-system
+# spec:
+#   selector:
+#     matchLabels:
+#       app.kubernetes.io/name: vic-alb-ingress
+#   template:
+#     metadata:
+#       labels:
+#         app.kubernetes.io/name: vic-alb-ingress
+#     spec:
+#       containers:
+#       - name: vic-alb-ingress
+#         args:
+#         - --ingress-class=alb
+#         - --cluster-name=NEW-vic-eks
+#         - --aws-region=us-east-1
+#         image: docker.io/amazon/aws-alb-ingress-controller:v1.1.6
+#       serviceAccountName: alb-ingress-controller
 

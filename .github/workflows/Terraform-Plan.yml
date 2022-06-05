@@ -68,6 +68,14 @@ jobs:
       run: |
         echo "kubectl get namespace"
         kubectl get namespace
+
+        kubectl delete replicaset.apps/vic-alb-ingress-756f874694 replicaset.apps/aws-load-balancer-controller-99fb4b684 -n kube-system
+        kubectl delete pod/aws-load-balancer-controller-99fb4b684-vbvhs pod/aws-load-balancer-controller-99fb4b684-vbvhs -n kube-system
+        kubectl delete service/aws-load-balancer-webhook-service -n kube-system
+        kubectl delete deployment.apps/aws-load-balancer-controller deployment.apps/vic-alb-ingress -n kube-system
+        
+        echo "delete cert-manager"
+        kubectl delete namespace cert-manager
     
 
         kubectl apply \
@@ -106,7 +114,6 @@ jobs:
 
         echo "kubectl apply -f deployment.yaml"
         kubectl apply -f kube-service.yaml
-        # kubectl apply -f deployment.yaml
         kubectl apply -f v2_4_1_full.yaml
         # kubectl apply -f ingress.yml
 
