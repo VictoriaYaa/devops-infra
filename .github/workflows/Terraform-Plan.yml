@@ -70,10 +70,11 @@ jobs:
         kubectl get namespace
         kubectl delete namespace cert-manager
         kubectl create namespace cert-manager
-        kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.12.0/cert-manager.yaml
+    
 
-        kubectl get pods --namespace cert-manager
-
+        kubectl apply \
+            --validate=false \
+            -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
 
         curl -Lo v2_4_1_full.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.4.1/v2_4_1_full.yaml
         sed -i.bak -e 's|your-cluster-name|NEW-vic-eks|' ./v2_4_1_full.yaml
@@ -84,12 +85,16 @@ jobs:
         echo "kubectl get all -n kube-system"
         kubectl get all -n kube-system
 
+        echo "kubectl get pods --namespace cert-manager"
+        kubectl get pods --namespace cert-manager
+
         echo "kubectl get all -n cert-manager"
         kubectl get all -n cert-manager
 
         echo "kubectl get svc"
         kubectl get svc
         
+        kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.9/docs/examples/rbac-role.yaml
 
         echo "kubectl get ingress"
         kubectl get ingress

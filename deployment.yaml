@@ -4,7 +4,7 @@ metadata:
   name: vic-alb-ingress
   labels: 
     app.kubernetes.io/name: vic-alb-ingress
-  namespace: default
+  namespace: kube-system
 spec:
   selector:
     matchLabels:
