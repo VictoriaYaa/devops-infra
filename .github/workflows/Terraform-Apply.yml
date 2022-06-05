@@ -73,9 +73,6 @@ jobs:
         
     - name: Verify Deployment of the Image to Amazon EKS
       run: |
-        kubectl delete service/counter-service  
-        kubectl delete service/internal-lb-service
-        
         echo "kubectl get all"
         kubectl get all
         echo "kubectl get nodes -o wide"
