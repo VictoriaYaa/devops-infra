@@ -66,8 +66,6 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
-        kubectl get deployment -n kube-system aws-load-balancer-controller
-
         kubectl apply -f kube-service.yaml
         kubectl apply -f v2_0_0_full.yml
 
