@@ -98,6 +98,8 @@ jobs:
         echo "kubectl apply -f deployment.yaml"
         kubectl apply -f deployment.yaml
         kubectl get po -n cert-manager
+        echo "kubectl describe po cert-manager-webhook-764b556954-rpbcj -n cert-manager"
+        kubectl describe po cert-manager-webhook-764b556954-rpbcj -n cert-manager
         # kubectl apply -f v2_4_1_full.yaml
         # kubectl apply -f ingress.yml
 
