@@ -66,6 +66,7 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
+        kubectl delete svc aws-load-balancer-webhook-service
         kubectl apply -f kube-service.yaml
         kubectl apply -f v2_0_0_full.yml
 
@@ -80,10 +81,10 @@ jobs:
 
         echo "kubectl get svc"
         kubectl get svc
+        echo "kubectl get ingress"
         kubectl get ingress
-        kubectl delete ingress vic-counter-service-deployment-ingress
-        kubectl delete ingress vic-alb 
-        kubectl delete serviceaccount aws-load-balancer-controller
+        kubectl get -n endpoint
+
         kubectl apply -f kube-ingress.yml
 
 
