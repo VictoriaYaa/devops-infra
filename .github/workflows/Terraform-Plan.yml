@@ -66,6 +66,30 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
+        kubectl delete serviceaccount aws-load-balancer-controller
+        curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+        sudo mv /tmp/eksctl /usr/local/bin
+        
+        eksctl utils associate-iam-oidc-provider \
+          --region "us-east-1" \
+          --cluster "NEW-vic-eks" \
+          --approve
+        curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.2.0/docs/install/iam_policy.json
+        aws iam create-policy \
+            --policy-name AWSLoadBalancerControllerIAMPolicy \
+            --policy-document file://iam-policy.json
+
+        eksctl delete iamserviceaccount --cluster "NEW-vic-eks" --name=aws-load-balancer-controller
+        eksctl create iamserviceaccount \
+            --cluster="NEW-vic-eks" \
+            --namespace=default \
+            --name=aws-load-balancer-controller \
+            --attach-policy-arn="arn:aws:iam::457398059321:policy/AWSLoadBalancerControllerIAMPolicy" \
+            --override-existing-serviceaccounts \
+            --approve
+
+        
+        kubectl delete pod aws-lb-controller-6f47fc54f4-kv6zc aws-load-balancer-controller-99fb4b684-bq7t9 counter-service-6f94c5656f-smbg4 aws-load-balancer-webhook-service    
         kubectl apply -f kube-ingress.yml
         kubectl apply -f serviceaccount.yml
         kubectl apply -f kube-service.yaml
