@@ -1,0 +1,23 @@
+apiVersion: extentions/v1beta1
+kind: Ingress
+metadata:
+  name: "ingress-counter-service"
+  labels: 
+    app: ingress-counter-service
+  namespace: "default"
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+spec:
+  rules:
+  - host: counter-service.com
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: "counter-service"
+          servicePort: 80
+
+
