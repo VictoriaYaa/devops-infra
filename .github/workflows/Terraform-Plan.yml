@@ -81,8 +81,8 @@ jobs:
 
         echo "kubectl get svc"
         kubectl get svc
-        
-        aws eks describe-cluster --name NEW-vic-eks --query "cluster.identity.oidc.issuer" --output text
-        
 
+        kubectl apply \
+                --validate=false \
+                -f https://github.com/jetstack/cert-manager/releases/download/v1.1.1/cert-manager.yaml
         
