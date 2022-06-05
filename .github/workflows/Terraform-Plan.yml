@@ -69,7 +69,7 @@ jobs:
         echo "kubectl get namespace"
         kubectl get namespace
 
-        kubectl delete cert-manager 
+        kubectl delete namespace cert-manager 
 
         echo "kubectl get all -n default"
         kubectl get all -n default
