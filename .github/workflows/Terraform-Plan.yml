@@ -97,6 +97,12 @@ jobs:
         echo "kubectl get ingress"
         kubectl get ingress
 
+
+        echo "kubectl -n kube-system rollout status deployment aws-load-balancer-controller"
+        kubectl -n kube-system rollout status deployment aws-load-balancer-controller
+
+
+
         echo "kubectl describe svc aws-load-balancer-webhook-service -n kube-system"
         kubectl describe svc aws-load-balancer-webhook-service -n kube-system
 
