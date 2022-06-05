@@ -66,8 +66,6 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
-        kubectl delete svc external-lb-service internal-lb-service
-        kubectl delete pod counter-service-6f94c5656f-bp24w 
         kubectl apply -f kube-ingress.yml
         echo "kubectl get all"
         kubectl get all
