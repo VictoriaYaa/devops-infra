@@ -66,8 +66,6 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
-        kubectl delete deployment aws-load-balancer-controller
-        kubectl delete pod aws-load-balancer-controller-99fb4b684-gcjqd
         kubectl apply -f kube-service.yaml
         kubectl apply -f v2_0_0_full.yml
 
