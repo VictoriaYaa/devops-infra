@@ -83,4 +83,6 @@ jobs:
         echo "kubectl get svc"
         kubectl get svc
 
+        kubectl get deployment -n default aws-lb-controller
+
         
