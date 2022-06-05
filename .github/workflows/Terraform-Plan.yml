@@ -66,6 +66,10 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
+        kubectl delete serviceaccount alb-ingress-controller
+        kubectl delete clusterrole.rbac.authorization.k8s.io/alb-ingress-controller
+        kubectl delete delpoyment aws-load-balancer-controller
+        kubectl delete pod aws-load-balancer-controller-99fb4b684-gcjqd
         kubectl apply -f kube-service.yaml
         kubectl apply -f v2_0_0_full.yml
 
