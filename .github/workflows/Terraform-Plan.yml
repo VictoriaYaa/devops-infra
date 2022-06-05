@@ -76,8 +76,7 @@ jobs:
         aws eks describe-cluster --name NEW-vic-eks --query "cluster.identity.oidc.issuer" --output text
         kubectl apply -f kube-service.yaml
         kubectl apply -f v2_0_0_full.yml
-        kubectl get deployment -n kube-system aws-load-balancer-controller
-        
+
         echo "kubectl get all -n default"
         kubectl get all -n default
 
