@@ -100,8 +100,6 @@ jobs:
         echo "kubectl get deployments --all-namespaces"
         kubectl get deployments --all-namespaces
 
-        kubectl delete deployment.apps/vic-alb-ingress
-        kubectl delete deployment.apps/aws-lb-controller
 
         echo "kubectl describe svc aws-load-balancer-webhook-service -n kube-system"
         kubectl describe svc aws-load-balancer-webhook-service -n kube-system
@@ -109,8 +107,7 @@ jobs:
         echo "kubectl apply -f deployment.yaml"
         kubectl apply -f kube-service.yaml
         # kubectl apply -f deployment.yaml
-        kubectl get po -n cert-manager
-        # kubectl apply -f v2_4_1_full.yaml
+        kubectl apply -f v2_4_1_full.yaml
         # kubectl apply -f ingress.yml
 
         echo "kubectl get ingress"
