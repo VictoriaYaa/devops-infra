@@ -83,5 +83,5 @@ jobs:
         kubectl get svc
         aws iam create-policy \
           --policy-name AWSLoadBalancerControllerIAMPolicy \
-          --policy-document file://iam_policy.json
+          --policy-document file://iam.json
         
