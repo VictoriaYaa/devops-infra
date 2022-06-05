@@ -66,9 +66,6 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
-        kubectl delete clusterrole.rbac.authorization.k8s.io/alb-ingress-controller
-        kubectl delete clusterrolebinding.rbac.authorization.k8s.io/alb-ingress-controller
-        kubectl delete serviceaccount/alb-ingress-controller
         kubectl apply \
             --validate=false \
             -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
