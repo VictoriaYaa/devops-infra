@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: vic-alb
@@ -15,5 +15,7 @@ spec:
         paths:
           - path: /*
             backend:
-              serviceName: counter-service
-              servicePort: 80
+              service:
+                name: counter-service
+                port:
+                  number: 80
