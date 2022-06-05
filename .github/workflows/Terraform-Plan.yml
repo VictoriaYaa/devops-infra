@@ -70,11 +70,6 @@ jobs:
         sudo mv /tmp/eksctl /usr/local/bin
         
 
-        curl -o iam.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.2.0/docs/install/iam.json
-        aws iam create-policy \
-            --policy-name AWSLoadBalancerControllerIAMPolicy \
-            --policy-document file://iam.json
-
         eksctl create iamserviceaccount \
             --cluster="NEW-vic-eks" \
             --namespace=default \
