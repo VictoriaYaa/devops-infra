@@ -81,7 +81,10 @@ jobs:
 
         echo "kubectl get svc"
         kubectl get svc
-        aws iam create-policy \
-          --policy-name AWSLoadBalancerControllerIAMPolicy \
-          --policy-document file://iam.json
+        
+        aws eks describe-cluster --name NEW-vic-eks --query "cluster.identity.oidc.issuer" --output text
+        curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+        sudo mv /tmp/eksctl /usr/local/bin
+        eksctl utils associate-iam-oidc-provider --cluster=NEW-vic-eks --approve
+
         
