@@ -19,6 +19,7 @@ spec:
   - host: "vic-counter-services.com"
     http:
       paths:
-      - backend:
+      - path: /*
+        backend:
           serviceName: alb-service
           servicePort: 80
