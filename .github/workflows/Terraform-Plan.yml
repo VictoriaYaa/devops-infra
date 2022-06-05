@@ -66,11 +66,16 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
-        kubectl apply \
-            --validate=false \
-            -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
-
         aws eks describe-cluster --name NEW-vic-eks --query "cluster.identity.oidc.issuer" --output text
+
+        aws iam create-role \
+          --role-name AmazonEKSLoadBalancerControllerRole \
+          --assume-role-policy-document file://"load-balancer-role-trust-policy.json"
+
+        aws iam attach-role-policy \
+          --policy-arn arn:aws:iam::476285196763:policy/AWSLoadBalancerControllerIAMPolicy \
+          --role-name AmazonEKSLoadBalancerControllerRole
+
         kubectl apply -f kube-service.yaml
         kubectl apply -f v2_0_0_full.yml
 
