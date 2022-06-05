@@ -66,15 +66,6 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
-        eksctl create iamserviceaccount \
-            --cluster="NEW-vic-eks" \
-            --namespace=default \
-            --name=aws-load-balancer-controller \
-            --attach-policy-arn="arn:aws:iam::457398059321:policy/AWSLoadBalancerControllerIAMPolicy" \
-            --override-existing-serviceaccounts \
-            --approve
-
-        
         kubectl delete pod aws-lb-controller-6f47fc54f4-kv6zc aws-load-balancer-controller-99fb4b684-bq7t9 counter-service-6f94c5656f-smbg4 aws-load-balancer-webhook-service    
         kubectl apply -f kube-ingress.yml
         kubectl apply -f serviceaccount.yml
