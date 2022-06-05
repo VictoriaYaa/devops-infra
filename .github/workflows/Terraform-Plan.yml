@@ -66,17 +66,8 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
-        kubectl apply -f kube-service.yaml
-        kubectl apply \
-          --validate=false \
-          -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
-        curl -Lo v2_4_1_full.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.4.1/v2_4_1_full.yaml
-        sed -i.bak -e 's|your-cluster-name|NEW-vic-eks|' ./v2_4_1_full.yaml
-
-
-        kubectl apply -f crd-certificates.yml
-
-        kubectl apply -f v2_4_1_full.yaml
+        echo "kubectl get namespace"
+        kubectl get namespace
 
         echo "kubectl get all -n default"
         kubectl get all -n default
@@ -90,6 +81,10 @@ jobs:
         echo "kubectl get svc"
         kubectl get svc
         
+        kubectl apply -f kube-service.yaml
+
+        kubectl apply -f crd-certificates.yml
+
         echo "kubectl get ingress"
         kubectl get ingress
 
@@ -99,6 +94,7 @@ jobs:
 
         echo "kubectl get ingress"
         kubectl get ingress
+
 
 
         
