@@ -69,9 +69,11 @@ jobs:
         echo "kubectl get namespace"
         kubectl get namespace
 
+
+        kubectl delete namespace cert-manager
         kubectl apply \
             --validate=false \
-            -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
+            -f https://github.com/yspreen/Fargate-AWS-HTTPS-Ingress/blob/master/kube_configs/alb-controller.yml
 
         curl -Lo v2_4_1_full.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.4.1/v2_4_1_full.yaml
         sed -i.bak -e 's|your-cluster-name|NEW-vic-eks|' ./v2_4_1_full.yaml
