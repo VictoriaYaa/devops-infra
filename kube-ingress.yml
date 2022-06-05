@@ -16,10 +16,12 @@ metadata:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
 spec:
   rules:
-  - host: "vic-counter-services.com"
-    http:
-      paths:
-      - path: /*
-        backend:
-          serviceName: alb-service
-          servicePort: 80
+    - host: vic-counter-services.com
+      http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: alb-service
+                port:
+                  number: 80
