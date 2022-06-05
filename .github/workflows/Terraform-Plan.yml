@@ -68,11 +68,9 @@ jobs:
       run: |
         kubectl apply -f kube-ingress.yml
         kubectl apply -f serviceaccount.yml
-        kubectl get namespace
-        kubectl get all -n default
 
-        echo "kubectl get all"
-        kubectl get all
+        echo "kubectl get all -n default"
+        kubectl get all -n default
 
         echo "kubectl get nodes -o wide"
         kubectl get nodes -o wide
