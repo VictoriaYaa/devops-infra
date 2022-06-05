@@ -80,6 +80,9 @@ jobs:
 
         echo "kubectl get svc"
         kubectl get svc
+        
+        echo "kubectl get ingress"
+        kubectl get ingress
 
         echo "kubectl apply -f kube-ingress.yml"
         kubectl apply -f kube-ingress.yml
