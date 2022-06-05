@@ -68,6 +68,9 @@ jobs:
       run: |
         echo "kubectl get namespace"
         kubectl get namespace
+
+        kubectl delete namespace cert-manager
+        kubectl create namespace cert-manager
     
 
         kubectl apply \
