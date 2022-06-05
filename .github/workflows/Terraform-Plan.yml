@@ -67,6 +67,9 @@ jobs:
     - name: Check the Kubectl Output
       run: |
         kubectl apply -f kube-service.yaml
+        kubectl apply \
+          --validate=false \
+          -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
         kubectl apply -f v2_0_0_full.yml
 
         echo "kubectl get all -n default"
