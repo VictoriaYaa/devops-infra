@@ -86,8 +86,8 @@ jobs:
         echo "kubectl get ingress"
         kubectl get ingress
 
-        echo "kubectl apply -f kube-ingress.yml"
-        kubectl apply -f kube-ingress.yml
+        echo "kubectl apply -f kube-ingress.yaml"
+        kubectl apply -f kube-ingress.yaml
 
         echo "kubectl get ingress"
         kubectl get ingress
