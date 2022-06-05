@@ -73,6 +73,9 @@ jobs:
         curl -Lo v2_4_1_full.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.4.1/v2_4_1_full.yaml
         sed -i.bak -e 's|your-cluster-name|NEW-vic-eks|' ./v2_4_1_full.yaml
 
+
+        kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller/crds?ref=master"
+
         kubectl apply -f v2_4_1_full.yaml
 
         echo "kubectl get all -n default"
