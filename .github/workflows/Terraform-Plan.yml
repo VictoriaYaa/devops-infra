@@ -68,8 +68,6 @@ jobs:
       run: |
         echo "kubectl get namespace"
         kubectl get namespace
-        kubectl delete namespace cert-manager
-        kubectl create namespace cert-manager
     
 
         kubectl apply \
@@ -99,12 +97,15 @@ jobs:
         echo "kubectl get ingress"
         kubectl get ingress
 
+        echo "kubectl describe svc aws-load-balancer-webhook-service -n kube-system"
+        kubectl describe svc aws-load-balancer-webhook-service -n kube-system
+
         echo "kubectl apply -f deployment.yaml"
         kubectl apply -f kube-service.yaml
         kubectl apply -f deployment.yaml
         kubectl get po -n cert-manager
         # kubectl apply -f v2_4_1_full.yaml
-        kubectl apply -f ingress.yml
+        # kubectl apply -f ingress.yml
 
         echo "kubectl get ingress"
         kubectl get ingress
