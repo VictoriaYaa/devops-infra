@@ -68,7 +68,7 @@ jobs:
       run: |
         kubectl apply -f kube-ingress.yml
         kubectl apply -f serviceaccount.yml
-        kubectl create serviceaccount serviceaccount-vic --cluster
+        kubectl create serviceaccount serviceaccount-vic --cluster NEW-vic-eks
         echo "kubectl get all"
         kubectl get all
 
