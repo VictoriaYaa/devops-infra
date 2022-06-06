@@ -85,7 +85,7 @@ resource "aws_eks_node_group" "node-ec2" {
   }
 
   ami_type       = "AL2_x86_64"
-  instance_types = ["t3.micro"]
+  instance_types = ["t2.small"]
   capacity_type  = "ON_DEMAND"
   disk_size      = 20
 
