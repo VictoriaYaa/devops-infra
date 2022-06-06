@@ -4,6 +4,7 @@ on:
   push:
     branches:
     - alb-controller_branch
+    - ingress-auto-discover
 
 permissions:
   id-token: write
@@ -69,7 +70,7 @@ jobs:
         kubectl apply -f /alb/ingress-service.yml
         kubectl apply -f /alb/serviceaccount.yml
         kubectl apply -f /alb/v2_4_1_full.yaml
-        
+
         echo "kubectl get all"
         kubectl get all
 
