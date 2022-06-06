@@ -67,10 +67,10 @@ jobs:
 
     - name: Deploy Services to Amazon EKS
       run: |
-        kubectl apply -f /alb/aws-auth.yaml
-        kubectl apply -f /alb/ingress-service.yml
-        kubectl apply -f /alb/serviceaccount.yml
-        kubectl apply -f /alb/v2_4_1_full.yaml
+        kubectl apply -f aws-auth.yaml
+        kubectl apply -f ingress-service.yml
+        kubectl apply -f serviceaccount.yml
+        kubectl apply -f v2_4_1_full.yaml
         
         
     - name: Verify Deployment of the Image to Amazon EKS

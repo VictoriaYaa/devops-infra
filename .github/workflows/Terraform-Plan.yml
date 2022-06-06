@@ -66,11 +66,6 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
-        kubectl apply -f aws-auth.yaml
-        kubectl apply -f ingress-service.yml
-        kubectl apply -f serviceaccount.yml
-        kubectl apply -f v2_4_1_full.yaml
-
         echo "kubectl get all"
         kubectl get all
 
