@@ -2,27 +2,24 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: default
-  name: counter-service-alb
+  name: counter-service-vic
   annotations:
-    kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/load-balancer-name: counter-service-alb
+    alb.ingress.kubernetes.io/load-balancer-name: counter-service-vic
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: instance 
-
-    
-    
-
 spec:
+  ingressClassName: alb
   rules:
   - http:
       paths:
-      - path: /*
+      - path: /
         pathType: Prefix
         backend:
           service:
             name: counter-service
             port:
               number: 80
+
 ---
 apiVersion: v1
 kind: Service
@@ -32,8 +29,7 @@ metadata:
 spec:
   ports:
     - port: 80
-      targetPort: 80
       protocol: TCP
   type: NodePort
   selector:
-    app.kubernetes.io/name: counter-service
+    app.kubernetes.io/name: app-counter
