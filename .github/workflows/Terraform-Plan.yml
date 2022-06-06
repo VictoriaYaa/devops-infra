@@ -68,7 +68,7 @@ jobs:
         echo "kubectl get pods -n kube-system"
         kubectl get pods -n kube-system
         echo "ls /etc/cni/net.d"
-        ls /etc/cni/net.d
+        ls /etc/cni/
         echo "kubectl get all"
         kubectl get all
 
