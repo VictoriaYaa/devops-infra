@@ -65,20 +65,19 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
+        kubectl apply -f /alb/aws-auth.yaml
+        kubectl apply -f /alb/ingress-service.yml
+        kubectl apply -f /alb/serviceaccount.yml
+        kubectl apply -f /alb/v2_4_1_full.yaml
         
+        echo "kubectl get all"
+        kubectl get all
 
+        echo "kubectl get nodes -o wide"
+        kubectl get nodes -o wide
 
-        echo "kubectl get pods -n kube-system"
-        kubectl get pods -n kube-system
+        echo "kubectl get pods -o wide"
+        kubectl get pods -o wide
 
-        # echo "kubectl get all"
-        # kubectl get all
-
-        # echo "kubectl get nodes -o wide"
-        # kubectl get nodes -o wide
-
-        # echo "kubectl get pods -o wide"
-        # kubectl get pods -o wide
-
-        # echo "kubectl get svc"
-        # kubectl get svc
+        echo "kubectl get svc"
+        kubectl get svc
