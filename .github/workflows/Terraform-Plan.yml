@@ -65,7 +65,7 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
-        echo "kubectl --version"
+        echo "kubectl version"
         kubectl --version
         echo "kubectl get all"
         kubectl get all
