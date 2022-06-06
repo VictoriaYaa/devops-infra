@@ -68,7 +68,7 @@ jobs:
         echo "CURL"
         curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.4.1/docs/install/iam_policy.json
         
-        detach-role-policy \
+        aws iam detach-role-policy \
             --role-name AmazonEKSLoadBalancerControllerRole \
             --policy-arn arn:aws:iam::476285196763:policy/AWSLoadBalancerControllerIAMPolicy
 
