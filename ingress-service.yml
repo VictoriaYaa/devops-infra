@@ -12,8 +12,7 @@ metadata:
 
 spec:
   rules:
-  - host: www.vic-counter-service.com
-    http:
+  - http:
       paths:
       - path: /*
         pathType: Prefix
