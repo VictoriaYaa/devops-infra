@@ -65,8 +65,10 @@ jobs:
 
     - name: Check the Kubectl Output
       run: |
-        echo "kubectl version"
-        kubectl version
+        echo "kubectl get pods -n kube-system"
+        kubectl get pods -n kube-system
+        echo "ls /etc/cni/net.d"
+        ls /etc/cni/net.d
         echo "kubectl get all"
         kubectl get all
 
