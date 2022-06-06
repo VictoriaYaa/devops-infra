@@ -55,6 +55,12 @@ resource "aws_iam_role_policy_attachment" "AmazonEKS_CNI_Policy" {
   role       = aws_iam_role.NodeGroupRole.name
 }
 
+resource "aws_iam_role_policy_attachment" "AWSCertificateManagerReadOnly" {
+  policy_arn = "arn:aws:iam::aws:policy/AWSCertificateManagerReadOnly"
+  role       = aws_iam_role.NodeGroupRole.name
+}
+
+
 
 
 resource "aws_eks_cluster" "eks-cluster" {
@@ -92,7 +98,10 @@ resource "aws_eks_node_group" "node-ec2" {
   depends_on = [
     aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,
-    aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy
+    aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy,
+    aws_iam_role_policy_attachment.AWSCertificateManagerReadOnly
+    
+
   ]
 }
 
