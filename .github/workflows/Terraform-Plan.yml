@@ -68,14 +68,14 @@ jobs:
         echo "kubectl get pods -n kube-system"
         kubectl get pods -n kube-system
 
-        echo "kubectl get pod aws-node-9kqts -n kube-system -o wide"
-        kubectl get pod aws-node-9kqts -n kube-system -o wide
+        echo "kubectl describe pod aws-node-9kqts -n kube-system -o wide"
+        kubectl describe pod aws-node-9kqts -n kube-system -o wide
 
-        echo "kubectl get pod coredns-66cb55d4f4-sjlh2 -n kube-system -o wide"  
-        kubectl get pod coredns-66cb55d4f4-sjlh2 -n kube-system -o wide
+        echo "kubectl describe pod coredns-66cb55d4f4-sjlh2 -n kube-system -o wide"  
+        kubectl describe pod coredns-66cb55d4f4-sjlh2 -n kube-system -o wide
 
-        echo "kubectl get pod kube-proxy-hg5wl  -n kube-system -o wide"  
-        kubectl get pod kube-proxy-hg5wl -n kube-system -o wide
+        echo "kubectl describe pod kube-proxy-hg5wl  -n kube-system -o wide"  
+        kubectl describe pod kube-proxy-hg5wl -n kube-system -o wide
 
         echo "kubectl get all"
         kubectl get all
